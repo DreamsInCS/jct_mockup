@@ -5,10 +5,6 @@ import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:path_provider/path_provider.dart';
 
-// Add WebSocket to pubspec!
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-
 class RecordScreen extends StatefulWidget {
 
   @override
@@ -21,7 +17,6 @@ class _RecordScreenState extends State<RecordScreen> {
   Timer _t;
   Widget _buttonIcon = Icon(Icons.do_not_disturb_on);
   String _alert;
-  // WebSocket variable
 
   @override
   void initState() {
@@ -151,6 +146,27 @@ class _RecordScreenState extends State<RecordScreen> {
     }
   }
 
+  Widget audioDataWidget() {
+    if (_recorder != null) {
+      return Column(
+        children: [
+          StreamBuilder(
+            stream: _recorder.ws,
+            // stream: _recorder.socketStream,
+            builder: (BuildContext context, snapshot) {
+              return Text(snapshot.hasData ? "_audioSnippet is ${snapshot.data}." : "waiting...");
+            }
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ]
+      );
+    } else {
+      return Text("Recorder not yet initialized.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,6 +236,7 @@ class _RecordScreenState extends State<RecordScreen> {
               SizedBox(
                 height: 20,
               ),
+              audioDataWidget(),
               RaisedButton(
                 child: Text('Play'),
                 disabledTextColor: Colors.white,
@@ -245,7 +262,7 @@ class _RecordScreenState extends State<RecordScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: _opt,
         child: _buttonIcon,
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
