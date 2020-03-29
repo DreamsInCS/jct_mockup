@@ -151,10 +151,9 @@ class _RecordScreenState extends State<RecordScreen> {
       return Column(
         children: [
           StreamBuilder(
-            stream: _recorder.ws,
-            // stream: _recorder.socketStream,
+            stream: _recorder.ws, // websocket
             builder: (BuildContext context, snapshot) {
-              return Text(snapshot.hasData ? "_audioSnippet is ${snapshot.data}." : "waiting...");
+              return Text(snapshot.hasData ? "_audioSnippet's length is ${snapshot.data.length}." : "waiting...");
             }
           ),
           SizedBox(
