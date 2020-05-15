@@ -30,7 +30,7 @@ dependencies:
   http: any # <---- Not advised, must change
   path_provider: '>= 0.4.1'
   rxdart: ">= 0.16.7"
-  pinput: ^0.1.10
+  pinput: ^0.2.0
   web_socket_channel: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.

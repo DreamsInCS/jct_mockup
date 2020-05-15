@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'blocs/auth_provider.dart';
 import 'screens/auth_screen.dart';
 import 'screens/dashboard.dart';
-import 'screens/record_screen.dart';
+import 'screens/listen_screen.dart';
+import 'screens/perform_screen.dart';
 
 class App extends StatelessWidget {
   Widget build(context) {
@@ -17,24 +18,31 @@ class App extends StatelessWidget {
       case "/":
         return MaterialPageRoute(
           builder: (context) {
-            // return Dashboard();
-            return RecordScreen();
+            return Dashboard();
+            // return PerformScreen();
           }
         );
 
-      // case "/auth":
-      //   return MaterialPageRoute(
-      //     builder: (context) {
-      //       return AuthProvider(
-      //         child: AuthScreen()
-      //       );
-      //     }
-      //   );
-
-      case "/record":
+      case "/auth":
         return MaterialPageRoute(
           builder: (context) {
-            return RecordScreen();
+            return AuthProvider(
+              child: AuthScreen()
+            );
+          }
+        );
+
+      case "/perform":
+        return MaterialPageRoute(
+          builder: (context) {
+            return PerformScreen();
+          }
+        );
+
+      case "/listen":
+        return MaterialPageRoute(
+          builder: (context) {
+            return ListenScreen();
           }
         );
     
